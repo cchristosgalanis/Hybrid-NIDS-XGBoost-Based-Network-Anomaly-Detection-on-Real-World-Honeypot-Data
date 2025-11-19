@@ -1,4 +1,4 @@
-# Hybrid NIDS: Benchmarking XGBoost on Real-World Honeypot Data
+# Hybrid NIDS: XGBoost-Based Network Anomaly Detection on Real-World Honeypot Data
 
 ## Project Overview
 
