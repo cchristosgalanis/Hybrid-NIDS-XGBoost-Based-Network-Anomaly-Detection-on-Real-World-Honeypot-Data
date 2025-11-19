@@ -8,8 +8,10 @@ import joblib
 def data_preprocess(filename1, filename2, filename3, filename4, filename5):
     # target column
     target_column = 'Label'
+    #columns we would like to drop
     columns_to_drop = ['Flow ID', 'Timestamp', 'Src IP', 'Dst IP', 'Src Port', 'Dst Port'] 
 
+    #files we use for train
     files_config = [
         {"path": filename1, "label": "HTTP_FLOOD", "type": "force"},
         {"path": filename2, "label": "SLOW_RATE_DOS", "type": "force"},
@@ -20,7 +22,7 @@ def data_preprocess(filename1, filename2, filename3, filename4, filename5):
 
     dataframes = []
 
-    print("--- Loading Datasets ---")
+    print("Loading Datasets")
     for f in files_config:
         try:
             print(f"Loading {f['path']}...", end=" ")
