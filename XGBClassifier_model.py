@@ -37,6 +37,7 @@ def xgbclassifier():
         print(f"Error calling preprocess: {e}")
         return
 
+    #x_first is already a dataframe
     x_df = x_first.reset_index(drop=True)
 
     #Label Preparation
@@ -66,7 +67,7 @@ def xgbclassifier():
     # Weights
     weights = compute_sample_weight(class_weight='balanced', y=ytrain)
 
-    # Model Training
+    # Loading model 
     print(f"Starting XGBoost training for {n_classes} classes...")
     model = XGBClassifier(
         objective='multi:softmax', 
@@ -78,7 +79,8 @@ def xgbclassifier():
         random_state=42,
         n_jobs=-1
     )
-    
+
+    #model training
     try:
         start_time = time.time()
         model.fit(xtrain, ytrain, sample_weight=weights)
@@ -88,7 +90,7 @@ def xgbclassifier():
         print(f"Error while training model: {e}")
         return
 
-    # 6. Predictions
+    # Predictions
     try:
         start_time = time.time()
         prediction = model.predict(xtest)
@@ -99,7 +101,7 @@ def xgbclassifier():
         print(f"Error while predicting: {e}")
         return
 
-    # 7. Metrics
+    # Calculate model's metrics
     accuracy = accuracy_score(ytest, prediction)
     precision = precision_score(ytest, prediction, average='weighted', zero_division=1)
     recall = recall_score(ytest, prediction, average='weighted', zero_division=1)
@@ -108,10 +110,12 @@ def xgbclassifier():
     print(f"\nMetrics: Accuracy {accuracy:.4f} | Precision {precision:.4f} | Recall {recall:.4f} | F1 {f1:.4f}")
     print(f"Time: Train {train_time:.4f}s | Predict {predict_time:.4f}s")
 
+    #Classification Report for model
     print("\nClassification Report:")
     print(classification_report(ytest, prediction, target_names=class_names))
 
-    # 8. Plots
+    # Plots
+    
     # Confusion Matrix
     plt.figure(figsize=(10, 8))
     cm = confusion_matrix(ytest, prediction)
