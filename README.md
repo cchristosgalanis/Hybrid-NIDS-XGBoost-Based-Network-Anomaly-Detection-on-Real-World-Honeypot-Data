@@ -1,1 +1,1 @@
-# XGBClassifier-Model-on-Network-Anomaly-and-Intrusion-Detection
+# XGBClassifier Model on Network Anomaly and Intrusion Detection (NIDS)
