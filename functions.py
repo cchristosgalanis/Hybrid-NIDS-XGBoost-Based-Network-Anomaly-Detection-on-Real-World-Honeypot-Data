@@ -11,18 +11,18 @@ def drop_nan(df): #take the dataframe as argument
             print("There was not NaN collumns")
     except FileNotFoundError:
         print("File was not found")
-    #επιστροφη του dataframe
+    #return dataframe
     return df
 
-#συναρτηση με την οποια κανουμε categorize το πρωτοκολλο καθε πακετου 
+#function to categorize protocols
 def categorize_protocol(df,collumn_name,start_num = 1):
-  codes, unique_protocols = df[collumn_name].factorize() #χρησιμοποιουμε την factorize(), για να κατηγοριοποιησουμε τα δεδομενα της συγκεκριμενης στηλης
+  codes, unique_protocols = df[collumn_name].factorize() #using factorize(), in order to categorize datas in each column
   encoded_protocols = codes + start_num
   protocol_map = {protocol: index+start_num for index,
-                  protocol in enumerate(unique_protocols)} #δημιουργω το λεξικο, με σκοπο να ξερουμε πως κατηγοριοπηθηκε το καθε πρωτοκολλο
+                  protocol in enumerate(unique_protocols)} #creating dict in order to have knowledge for every categorized protocol
   
-  df[collumn_name] = encoded_protocols #γινεται η αλλαγη κατευθειαν πανω στην στηλη
-  #επιστροφη του dataframe
+  df[collumn_name] = encoded_protocols 
+  #return dataframe
   return df
 
 #Function to fill missing values(Imputation)
@@ -50,16 +50,16 @@ def drop_train_unused(df,collumn_name):
     #return dataframe
     return df
 
-#συναρτηση η οποια κανει categorize τον χαρακτηρισμο της ροης(πχ "attack","normal", κλπ)
+#function which categorize each label (e.g attack or normal)
 def encode_label(df,collumn_name,start_num=1):
-    codes,unique_protocols = df[collumn_name].factorize() #προφανως παρομοια υλοποιηση με την categorize_protocol
+    codes,unique_protocols = df[collumn_name].factorize() #similar build with categorize_protocol
     encode_labels = codes + start_num
     label_map = {label: index+start_num for index,
-                 label in enumerate(unique_protocols)} #δημιουργια λεξικου, για να γνωριζουμε πως κατηγοριοπηθηκε η συγκεκριμενη στηλη
+                 label in enumerate(unique_protocols)} 
     
     df[collumn_name] = encode_labels
     print(f"Target column {collumn_name} has been Label Encoded")
-    #επιστροφη του dataframe
+    #retrun dataframe
     return df,label_map
 
 #Function to Label Encode a column(e.g protocols or services)
