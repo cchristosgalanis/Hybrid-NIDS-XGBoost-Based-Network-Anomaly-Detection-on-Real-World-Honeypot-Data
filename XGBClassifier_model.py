@@ -56,7 +56,7 @@ def xgbclassifier():
     unique, counts = np.unique(y, return_counts=True)
     rare_classes = unique[counts < 2]
     if len(rare_classes) > 0:
-        print(f"⚠️ Removing rare classes (<2 samples): {rare_classes}")
+        print(f" Removing rare classes (<2 samples): {rare_classes}")
         mask = ~np.isin(y, rare_classes)
         x_df = x_df[mask]
         y = y[mask]
