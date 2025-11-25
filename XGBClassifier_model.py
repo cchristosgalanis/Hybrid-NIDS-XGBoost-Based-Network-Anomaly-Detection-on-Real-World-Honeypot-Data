@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 from xgboost import XGBClassifier
-import dataset1 # Βεβαιώσου ότι το αρχείο λέγεται έτσι
+import dataset1 
 from sklearn.model_selection import train_test_split
 from sklearn.utils.class_weight import compute_sample_weight
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
